@@ -14,6 +14,6 @@ This project is a starting point for users interested in automating the upload a
 Please note that these scripts are distributed as-is as an example and will likely require modification to work for your specific use-case.
 
 
-#Interested in having someone guide you through this process?
+# Interested in having someone guide you through this process?
 
 Jama's Professional Services team can assist you with technical guidance. Contact your Customer Success manager for more information.
