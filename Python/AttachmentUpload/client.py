@@ -38,29 +38,28 @@ class Client():
 
     def uploadAttachmentFile(self, fileName, attachmentId):
         url = self.jama_config.rest_url + "attachments/{}/file".format(attachmentId)
-        files = {'file': open(fileName, 'rb')}
-        try:
-            response = requests.put(url, files=files, auth=self.auth, verify=self.verify)
-            if response.status_code == 200 or response.status_code == 201:
-                return True
-            else:
-                return False
-        except HTTPError as e:
-            print("error occurred")
-            return None
-
+        with open(fileName, 'rb') as files:
+            try:
+                response = requests.put(url, files=files, auth=self.auth, verify=self.verify)
+                if response.status_code == 200 or response.status_code == 201:
+                    return True
+                else:
+                    return False
+            except HTTPError as e:
+                print("error occurred")
+                return None
 
     def downloadAttachmentFile(self, attachmentId, filename):
         url = self.jama_config.rest_url + "attachments/{}/file".format(attachmentId)
         try:
             response = requests.get(url, auth=self.auth, verify=self.verify)
             if response.status_code == 200 or response.status_code == 201:
-                file = open(filename, "w")
-                file.write(response.content)
-                file.close()
-                return True
+                with open(filename, "w") as file:
+                    file.write(response.content)
+                    return True
             else:
                 return False
         except HTTPError as e:
             print("error occurred")
             return None
+
